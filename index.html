@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JavaScript Quiz</title>
+
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+	<style>
+		body {
+		background-color: black;
+		font-family: 'Montserrat', sans-serif;
+		}
+
+		#main {
+		width: 90%;
+		max-width: 1000px;
+		border: 1px gray solid;
+		margin: auto;
+		padding: 10px;
+		background-color: #FBF7F5;
+		border-radius: 10px;
+		}
+
+		#header {
+		margin-top: 0;
+		border: 2px solid black;
+		padding: 5px;
+		height: 250px;
+		background: beige;
+		background-image: url("crowd.jpg"); background-position: center; background-repeat: none;
+		color: white;
+		text-align: center;
+		}
+
+		#inner {
+			margin-left: 7%;
+		}
+
+		.intro {
+			padding-top: 25px;
+			margin-right: 10%;
+		}
+
+		/*
+		LOOK! This is one half of the code that hides/shows form2.
+		This is the HIDE half
+		 */
+		#form2 {
+			display: none; 
+		}
+
+		#result2 {
+			margin-right: 17%;
+			font-size: 20px;
+			text-align: center;
+		}
+
+		/* The end!
+		*/
+
+		label {
+		display: block;
+		}
+
+		input {
+		width: 60px;
+		margin-right: 1px;
+		}
+
+		h1 {
+		color: #FFF;
+		text-shadow: 2px 2px #000;
+	    opacity: 0.70;
+		padding-top:100px;
+		}
+
+		h2 {
+		clear: both;
+		padding-top: 20px;
+		}
+
+		button {
+		width: 100px;
+		margin-top: 20px;
+		}
+
+		p {
+			margin-left: 30px;
+			font-size: 15px;
+		}
+
+
+
+	</style>
+</head>
+<body>
+<div id="main"><!-- open main div -->
+
+		<div id="header"><!-- open header div -->
+			<h1>Can you afford to go out tonight?</h1>
+		</div><!-- close header div -->
+
+	
+	<div id="inner">
+	<form id="form">
+
+		<p class="intro">Are you thinking about going out with your friends tonight but you're not sure if you can afford it? Use this simple calculator to figure out how much money you made this week! By checking how many hours you worked by how much money you made we will let you know what you should do!</p>
+
+			<h2>How many hours did you work this week?</h2>
+				<p><input type="number" name="hours" id="hours" min="0" max="168"> hours</p>
+
+			<h2>How much money do you make per hour?</h2>
+				<p>$<input type="number" name="money" id="money" min="0"> per hour</p>
+
+			<h2>How much money have you spent this week?</h2>
+				<p>$<input type="number" name="spent" id="spent" min="0"> spent</p>
+
+		<button type="submit" value="Calculate">Submit</button> 
+		<input type="button" name="reset_form" value="Clear" onclick="this.form.reset();">
+
+	</form>
+
+
+
+	<form id="form2">
+			<h2>Are you sure you can spend less than $<span id="total"></span> tonight?</h2>
+				<label for="spending_yes"><input type="radio" name="spending" value="2" id="spending" />Of course! That's more than enough to have a good time!</label>
+				<label for="spending_no"><input type="radio" name="spending" value="0" id="spending" />Not a chance.</label>
+				<label for="spending_maybe"><input type="radio" name="spending" value="1" id="spending" />I don't know, maybe?</label>
+
+	</form>
+
+
+
+
+
+
+	<p><span id="result"></span></p>
+	<p id="result2"></p>
+	</div><!-- close inner div -->
+</div><!-- close main div -->
+
+
+<script>
+document.getElementById("form").onsubmit=function() {
+			hours1 = document.getElementById("hours").value;
+			money1 = document.getElementById("money").value;
+			spent1 = document.getElementById("spent").value;
+			total1 = hours1 * money1 - spent1;
+
+
+
+	//displays the total in the span
+	document.getElementById("total").innerHTML = total1;
+
+
+		//shows second form on submit
+		document.getElementById("form2").style.display="block";
+
+	return false; // required to not refresh the page; just leave this here
+	} //this ends the submit function
+
+
+	document.getElementById("form2").onchange=function() {
+		goOut = document.querySelector('input[name="spending"]:checked').value;
+
+	   
+		   answer = goOut
+		   		   
+
+	if (answer == 2) {result2 = "Have fun!<br /><img src='https://c1.staticflickr.com/6/5045/5331077427_b1ae6f76a3_b.jpg' width='400' />"};
+	if (answer == 0) {result2 = "You can't afford it.<br />Maybe just stay home and watch a movie?<br /><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Netflix_logo.svg/2000px-Netflix_logo.svg.png' width='400' />"};
+	if (answer == 1) {result2 = "Sounds risky!<br /><img src='https://c1.staticflickr.com/6/5007/5262645427_a47dba0232_b.jpg' width='400' />"};
+	document.getElementById("result2").innerHTML = result2; 
+
+
+}
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
